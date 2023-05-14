@@ -1882,7 +1882,7 @@ def update_training_dataplot(x_min=None, x_max=None, y_min=None, y_max=None, con
 			losses = gr.LinePlot.update(
 				value = pd.DataFrame(training_state.statistics['loss']),
 				x_lim=x_lim, y_lim=y_lim,
-				x="it", y="value", # x="epoch",
+				x="epoch", y="value", # x="it",
 				title="Loss Metrics", color="type", tooltip=['epoch', 'it', 'value', 'type'],
 				width=500, height=350
 			)
@@ -1890,7 +1890,7 @@ def update_training_dataplot(x_min=None, x_max=None, y_min=None, y_max=None, con
 			lrs = gr.LinePlot.update(
 				value = pd.DataFrame(training_state.statistics['lr']),
 				x_lim=x_lim,
-				x="it", y="value", # x="epoch",
+				x="epoch", y="value", # x="it",
 				title="Learning Rate", color="type", tooltip=['epoch', 'it', 'value', 'type'],
 				width=500, height=350
 			)
@@ -1898,7 +1898,7 @@ def update_training_dataplot(x_min=None, x_max=None, y_min=None, y_max=None, con
 			grad_norms = gr.LinePlot.update(
 				value = pd.DataFrame(training_state.statistics['grad_norm']),
 				x_lim=x_lim,
-				x="it", y="value", # x="epoch",
+				x="epoch", y="value", # x="it",
 				title="Gradient Normals", color="type", tooltip=['epoch', 'it', 'value', 'type'],
 				width=500, height=350
 			)
@@ -2320,9 +2320,9 @@ def phonemizer( text, language="en-us" ):
 
 	backend = _get_backend(language=language, backend=args.phonemizer_backend)
 	if backend is not None:
-		tokens = backend.phonemize( text, strip=True )
+		tokens = backend.phonemize( [text], strip=True )
 	else:
-		tokens = phonemize( text, language=language, strip=True, preserve_punctuation=True, with_stress=True )
+		tokens = phonemize( [text], language=language, strip=True, preserve_punctuation=True, with_stress=True )
 
 	return tokens[0] if len(tokens) == 0 else tokens
 	tokenized = " ".join( tokens )
